@@ -37,4 +37,3 @@ class Transfer:
     def get_data(self):
         """возвращает дату точно также как и в исходном .json"""
         return self.date
-

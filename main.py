@@ -2,7 +2,9 @@ from utils.function import get_data
 from utils.function import sort_status
 from utils.function import sort_dates
 from utils.function import revers
-# from utils.function import compilation_transfer
+from utils.function import format_date
+from utils.function import get_from_to
+from utils.function import cipher
 from config import data_file_name
 
 
@@ -12,16 +14,14 @@ def __main__():
     list_sorted_dates = sort_dates(list_sorted_status)
     last_5_transaction = revers(list_sorted_dates[-5:])
     for i in last_5_transaction:
-        print(i)
-
-    # l = compilation_transfer(data)
-    # for i in l:
-    #     # print(i.get_data())
-    #     print(i.get_amount())
-    #     # print(i.get_amount_name())
-    #     # print(i.get_description())
-    #     # print(i.get_bank_number())
-    #     # print(i.get_card_number())
+        print(f"{format_date(i['date'])} {i.get('description')}")
+        from_transaction, to_transaction = get_from_to(i)
+        if from_transaction:
+            print(f"{cipher(from_transaction)} -> {cipher(to_transaction)}")
+        else:
+            print(f"{cipher(to_transaction)}")
+        print(f"{i['operationAmount']['amount']} {i['operationAmount']['currency']['name']}")
+        print()
 
 
 if __name__ == "__main__":

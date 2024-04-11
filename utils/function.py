@@ -57,5 +57,5 @@ def cipher(str_) -> str | None:
     else:
         card_name = str_.split()[:-1]
         card_number = str_.split()[-1]
-        result = f"{' '.join(card_name)} {card_number[:4]} {card_number[4:6]} ** **** {card_number[12:]}"
+        result = f"{' '.join(card_name)} {card_number[:4]} {card_number[4:6]}** **** {card_number[12:]}"
         return result

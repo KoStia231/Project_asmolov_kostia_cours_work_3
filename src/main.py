@@ -1,10 +1,10 @@
-from utils.function import get_data_json
-from utils.function import sort_status
-from utils.function import sort_dates
-from utils.function import revers
-from utils.function import format_date
-from utils.function import get_from_to
-from utils.function import cipher
+from src.utils.function import get_data_json
+from src.utils.function import sort_status
+from src.utils.function import sort_dates
+from src.utils.function import revers
+from src.utils.function import format_date
+from src.utils.function import get_from_to
+from src.utils.function import cipher
 from config import data_file_name
 
 

@@ -3,7 +3,7 @@ import datetime
 
 
 def get_data_json(file_name) -> list:
-    """читает файл json, конвертирует в лист с словарями и взовращает его"""
+    """Читает файл json, конвертирует в лист со словарями и возвращает его"""
     with open(file_name, 'r', encoding="utf-8") as file:
         json_ = file.read()
         json_list = json.loads(json_)
@@ -11,7 +11,7 @@ def get_data_json(file_name) -> list:
 
 
 def sort_status(json_list: list, state: str) -> list:
-    """сортировка по статусу"""
+    """Сортировка по статусу"""
     result = []
     for i in json_list:
         if i.get('state') == state:
@@ -20,23 +20,23 @@ def sort_status(json_list: list, state: str) -> list:
 
 
 def sort_dates(list_: list) -> list:
-    """сортирует по датам от меньшего к большему"""
+    """Сортирует по датам от меньшего к большему"""
     return sorted(list_, key=lambda x: x['date'])
 
 
 def revers(list_: list) -> list:
-    """разворачивает список от большего к меньшему"""
+    """Разворачивает список от большего к меньшему"""
     return list_[::-1]
 
 
 def format_date(value: str) -> str:
-    """вернет дату в нужном виде"""
+    """Вернет дату в нужном виде"""
     date = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
     return date.strftime('%d.%m.%Y')
 
 
 def get_from_to(dict_: dict, from_: str, to_: str) -> (bool, str):
-    """вернет откуда карта/счет, куда карта/счет"""
+    """Вернет откуда карта/счет, куда карта/счет"""
     from_transaction = dict_.get(from_)
     to_transaction = dict_.get(to_)
     if from_transaction is None:

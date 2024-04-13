@@ -2,7 +2,7 @@ import json
 import datetime
 
 
-def get_data(file_name) -> list:
+def get_data_json(file_name) -> list:
     """читает файл json, конвертирует в лист с словарями и взовращает его"""
     with open(file_name, 'r', encoding="utf-8") as file:
         json_ = file.read()
@@ -10,11 +10,11 @@ def get_data(file_name) -> list:
     return json_list
 
 
-def sort_status(json_list: list) -> list:
-    """сохраняет только операции со статусом <<EXECUTED>>"""
+def sort_status(json_list: list, state: str) -> list:
+    """сортировка по статусу"""
     result = []
     for i in json_list:
-        if i.get('state') == "EXECUTED":
+        if i.get('state') == state:
             result.append(i)
     return result
 
@@ -29,24 +29,28 @@ def revers(list_: list) -> list:
     return list_[::-1]
 
 
-def format_date(value) -> str:
+def format_date(value: str) -> str:
     """вернет дату в нужном виде"""
     date = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
     return date.strftime('%d.%m.%Y')
 
 
-def get_from_to(dict_: dict):
+def get_from_to(dict_: dict, from_: str, to_: str) -> (bool, str):
     """вернет откуда карта/счет, куда карта/счет"""
-    from_transaction = dict_.get("from")
-    to_transaction = dict_.get("to")
+    from_transaction = dict_.get(from_)
+    to_transaction = dict_.get(to_)
     if from_transaction is None:
         return False, to_transaction
     return from_transaction, to_transaction
 
 
-def cipher(str_) -> str | None:
-    """возвращает номер счета в шифровонном виде или
-       возвращает карту в шифровонном виде"""
+def cipher(str_: str | bool) -> str | None:
+    """на вход получает строку <<Счет 65298957349197687907>>
+       или <<Visa Classic 3414396880443483>>
+       и тому подобное
+       или bool
+       возвращает  номер счета в шифровонном виде <<Счет **8381>> или
+       возвращает карту в шифровонном виде <<Maestro 7810 84** **** 5568>>"""
     if not str_:
         return None
     elif "счет" in str_.lower():

@@ -1,14 +1,16 @@
-from src.utils.function import get_data_json
-from src.utils.function import sort_status
-from src.utils.function import sort_dates
-from src.utils.function import revers
-from src.utils.function import format_date
-from src.utils.function import get_from_to
-from src.utils.function import cipher
+from src.utils.function import (
+    get_data_json,
+    sort_status,
+    sort_dates,
+    revers,
+    format_date,
+    get_from_to,
+    cipher
+)
 from config import data_file_name
 
 
-def __main__():
+def main():
     list_data = get_data_json(data_file_name)
     list_sorted_status = sort_status(list_data, state="EXECUTED")
     list_sorted_dates = sort_dates(list_sorted_status)
@@ -25,4 +27,4 @@ def __main__():
 
 
 if __name__ == "__main__":
-    __main__()
+    main()
